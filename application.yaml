@@ -1,23 +1,20 @@
-apiVersion: argoproj.io/v1alpha1
+apiVersion: arprojects.io/v1alpha1
 kind: Application
 metadata:
   name: myapp-argo-application
-  namespace: argocd
+  namespace: argocd # where this application CD configuration is stored
 spec:
   project: default
-
   source:
-    repoURL: https://gitlab.com/nanuchi/argocd-app-config.git
+    repoURL: https://github.com/TheFatPanda97/argocd-experiment.git
     targetRevision: HEAD
     path: dev
-  destination: 
-    server: https://kubernetes.default.svc
-    namespace: myapp
-
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: myapp # where the application will be deployed
   syncPolicy:
     syncOptions:
-    - CreateNamespace=true
-
+      - CreateNamespace=true
     automated:
       selfHeal: true
       prune: true
